@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import config from "./config";
-import RecipeCard from "./RecipeCard"; // Assuming you have a RecipeCard component
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import RecipeCard from "./RecipeCard";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -32,29 +34,34 @@ function App() {
   };
 
   return (
-    <div className='container'>
+    <Container>
       <h1 className='my-4'>Recipe Search</h1>
-      <div className='mb-4'>
-        <input
-          type='text'
-          className='form-control'
-          placeholder='Search for a recipe'
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button className='btn btn-primary mt-2' onClick={handleSearch}>
+      <Form>
+        <Form.Group>
+          <Form.Control
+            type='text'
+            placeholder='Search for a recipe'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant='primary' className='mt-2 ml-2' onClick={handleSearch}>
           Search
-        </button>
-      </div>
-      {error && <div className='alert alert-danger'>{error}</div>}
-      <div className='row'>
+        </Button>
+      </Form>
+      {error && (
+        <Alert variant='danger' className='mt-3'>
+          {error}
+        </Alert>
+      )}
+      <Row className='mt-4'>
         {recipes.map((recipeData, index) => (
-          <div className='col-md-4' key={index}>
+          <Col md={4} key={index}>
             <RecipeCard recipe={recipeData.recipe} />
-          </div>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 

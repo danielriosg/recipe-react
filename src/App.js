@@ -33,10 +33,14 @@ function App() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    handleSearch(); // Call the search handler
+  };
   return (
     <Container>
       <h1 className='my-4'>Recipe Search</h1>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Control
             type='text'

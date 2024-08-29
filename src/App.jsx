@@ -1,15 +1,15 @@
 import './App.css';
 import React from "react";
-import Header from "./components/Header";
 import RecipeList from "./components/RecipeList";
-import Home from "../src/pages/Home";
+import SearchBar from "./components/SearchBar";
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className='container'>
-      <Header />
-      <Home />
+      <SearchBar />
       <RecipeList />
+      <Footer />
     </div>
   );
 }

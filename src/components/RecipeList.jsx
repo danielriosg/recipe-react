@@ -1,6 +1,6 @@
 // src/components/RecipeList.jsx
 import React, { useState, useEffect } from "react";
-import { fetchRecipes } from "../api";
+import { fetchRecipes } from "../utils/api.js";
 
 const RecipeList = ({ query }) => {
   const [recipes, setRecipes] = useState([]);
@@ -9,6 +9,11 @@ const RecipeList = ({ query }) => {
   const [nextPageUrl, setNextPageUrl] = useState(null);
 
   useEffect(() => {
+    if (!query) {
+      setError("No search query provided.");
+      setLoading(false);
+      return;
+    }
     const getRecipes = async () => {
       setLoading(true);
       setError(null);

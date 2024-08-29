@@ -1,12 +1,15 @@
-import './App.css'
-
+import './App.css';
 import React from "react";
+import Header from "./components/Header";
+import RecipeList from "./components/RecipeList";
+import Home from "../src/pages/Home";
 
 function App() {
   return (
     <div className='container'>
-      <h1>Hello, Bootstrap!</h1>
-      <button className='btn btn-primary'>Test Button</button>
+      <Header />
+      <Home />
+      <RecipeList />
     </div>
   );
 }

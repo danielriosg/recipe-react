@@ -1,0 +1,11 @@
+footer {
+  background-color: #333; /* Dark gray background */
+  color: #fff; /* White text color */
+  padding: 1rem; /* Add some padding */
+  text-align: center; /* Center the text */
+  clear: both; /* Clear any floats */
+}
+
+footer p {
+  margin-bottom: 0; /* Remove margin bottom */
+}

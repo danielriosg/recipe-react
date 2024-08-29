@@ -1,44 +1,47 @@
+// src/components/RecipeList.jsx
 import React, { useState, useEffect } from "react";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { fetchRecipes } from "../api";
 
-const RecipeList = () => {
+const RecipeList = ({ query }) => {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
 
   useEffect(() => {
-    // This is where you would fetch recipes from an API
-    // For now, let's use some dummy data
-    const dummyRecipes = [
-      {
-        id: 1,
-        name: "Spaghetti Bolognese",
-        description: "A classic Italian pasta dish.",
-      },
-      {
-        id: 2,
-        name: "Chicken Curry",
-        description: "A flavorful and spicy curry.",
-      },
-    ];
+    const getRecipes = async () => {
+      setLoading(true);
+      setError(null);
 
-    setRecipes(dummyRecipes);
-  }, []);
+      const result = await fetchRecipes(query);
+      if (result.recipes.length) {
+        setRecipes(result.recipes);
+        setNextPageUrl(result.nextPageUrl);
+      } else {
+        setError("No recipes found.");
+      }
+
+      setLoading(false);
+    };
+
+    getRecipes();
+  }, [query]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <Container className='mt-4'>
-      <Row>
-        {recipes.map((recipe) => (
-          <Col key={recipe.id} sm={12} md={6} lg={4}>
-            <Card className='mb-4'>
-              <Card.Body>
-                <Card.Title>{recipe.name}</Card.Title>
-                <Card.Text>{recipe.description}</Card.Text>
-                <Button variant='primary'>View Recipe</Button>
-              </Card.Body>
-            </Card>
-          </Col>
+    <div>
+      <h2>Recipes</h2>
+      <ul>
+        {recipes.map((recipe, index) => (
+          <li key={index}>{recipe.recipe.label}</li>
         ))}
-      </Row>
-    </Container>
+      </ul>
+      {nextPageUrl && (
+        <button onClick={() => fetchMoreRecipes(nextPageUrl)}>Load More</button>
+      )}
+    </div>
   );
 };
 

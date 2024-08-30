@@ -3,7 +3,7 @@ import '../styles/footer.css'
 
 const Footer = () => {
   return (
-    <footer className='footer'>
+    <footer className='footer-custom'>
       <p>&copy; 2024 Your Recipe App. All rights reserved.</p>
       {/* Add any additional footer content here */}
     </footer>

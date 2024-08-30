@@ -1,9 +1,12 @@
-footer {
-  background-color: #333; /* Dark gray background */
-  color: #fff; /* White text color */
-  padding: 1rem; /* Add some padding */
-  text-align: center; /* Center the text */
-  clear: both; /* Clear any floats */
+.footer-custom {
+  padding: 0.5rem; /* Reduce padding to make the footer less tall */
+  position: fixed; /* Stick the footer to the bottom */
+  bottom: 0;
+  width: 100%; /* Full width footer */
+  background-color: green;
+  display: flex; /* Make the footer a flex container */
+  flex-direction: column; /* Stack the paragraphs vertically */
+  align-items: center; /* Center the content horizontally */
 }
 
 footer p {

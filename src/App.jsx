@@ -1,20 +1,22 @@
 import './App.css';
-import React from "react";
 import RecipeList from "./components/RecipeList";
 import SearchBar from "./components/SearchBar";
 import Footer from './components/Footer';
+import React, { useState } from "react";
+
 
 function App() {
+   const [searchQuery, setSearchQuery] = useState("");
   // Define the handleSearch function
   const handleSearch = (query) => {
-    console.log("Search query:", query);
-    // Implement your search logic here
+    setSearchQuery(query); // Update the search query state
+    console.log("Search query:", searchQuery); // Use the updated search query state
   };
 
   return (
     <div className='custom-container'>
       <SearchBar onSearch={handleSearch} />
-      <RecipeList />
+      <RecipeList query={searchQuery} />
       <Footer />
     </div>
   );
